@@ -14,6 +14,8 @@ To reproduce the results of the paper, please set up the Python environment usin
    
 # GESA-PCN
 
+We generated GESA-PCN using 17% (V1), 28% (V2), and 46% (V3) of packet loss.
+
 To downsample in any resolution:
 
      cd GESA-PCN
