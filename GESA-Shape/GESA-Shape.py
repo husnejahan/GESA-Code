@@ -35,7 +35,7 @@ Generate Generate GESA-Shape Dataset:
 #===========================================================================
 #===========================================================================
 
-from Gilbert_Attack import *
+from GESA import *
 import argparse
 import os
 import open3d as o3d
