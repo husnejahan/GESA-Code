@@ -3,16 +3,14 @@
 Author: Most Husne Jahan
 August -2023
 
-Generate Generate GESA-PCA_Shape Dataset:
+Generate Generate GESA-Shape Dataset:
 
-we get 41,952 models for training and 10,518 models for testing.
-For each object, randomly sample 8,192 points from the surface to obtain the point cloud.
-It has  55 categories in ShapeNet.
+* we get 41,952 models for training and 10,518 models for testing. It has 55 categories.
 
-We used only the GT point cloud from ShapeNet-55 dataset and apply Monotonic attack(packet loss) 
-to create our own attack point cloud for training, validation set.
+* We used only the GT point cloud from ShapeNet-55 dataset and apply Monotonic attack(packet loss) 
+ to create our own attack point cloud for training, validation set.
 
-    category_ids = {
+* category_ids = {
           {"02691156": "airplane", "02747177": "trash bin", "02773838": "bag", 
           "02801938": "basket", "02808440": "bathtub", "02818832": "bed", 
           "02828884": "bench", "02843684": "birdhouse", "02871439": "bookshelf", 
