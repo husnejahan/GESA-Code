@@ -3,7 +3,7 @@
 # Author: Most Husne Jahan
 # December -2023
 
-# Generate PCN-Attack Dataset
+# Generate GESA-PCN Dataset
 
 # Create env:
 
