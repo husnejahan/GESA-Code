@@ -26,7 +26,7 @@ to create our own partial/attack point cloud for training, validation and test s
 """
 #===========================================================================
 
-from Gilbert_Attack import *
+from GESA import *
 import argparse
 import os
 import open3d as o3d
@@ -37,14 +37,14 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--train_folder_source', type=str, default='GESA-PCA-PCN/train/GT', help='train source')
-parser.add_argument('--train_folder_des', type=str, default='GESA-PCA-PCN/train/attack', help='train destination')
+parser.add_argument('--train_folder_source', type=str, default='GESA-PCN/train/GT', help='train source')
+parser.add_argument('--train_folder_des', type=str, default='GESA-PCN/train/attack', help='train destination')
 
-parser.add_argument('--val_folder_source', type=str, default='GESA-PCA-PCN/val/GT', help='val source')
-parser.add_argument('--val_folder_des', type=str, default='GESA-PCA-PCN/val/attack', help='val destination')
+parser.add_argument('--val_folder_source', type=str, default='GESA-PCN/val/GT', help='val source')
+parser.add_argument('--val_folder_des', type=str, default='GESA-PCN/val/attack', help='val destination')
 
-parser.add_argument('--test_folder_source', type=str, default='GESA-PCA-PCN/test/GT', help='test source')
-parser.add_argument('--test_folder_des', type=str, default='GESA-PCA-PCN/test/attack', help='test destination')
+parser.add_argument('--test_folder_source', type=str, default='GESA-PCN/test/GT', help='test source')
+parser.add_argument('--test_folder_des', type=str, default='GESA-PCN/test/attack', help='test destination')
 
 parser.add_argument('--mode', type=str, default='Train', help='Train or Val or Test')
 args = parser.parse_args()
