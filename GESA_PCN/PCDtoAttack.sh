@@ -3,7 +3,7 @@
 # Author: Most Husne Jahan
 # December -2023
 
-# Generate PCN-Attack Dataset
+# Generate GESA-PCN Dataset
 
 # Create env:
 
@@ -17,7 +17,7 @@
 # """
 
 
-python3 PCN_Attack.py --mode Train
-python3 PCN_Attack.py --mode Val
-python3 PCN_Attack.py --mode Test
+python3 GESA-PCN.py --mode Train
+python3 GESA-PCN.py --mode Val
+python3 GESA-PCN.py --mode Test
 
