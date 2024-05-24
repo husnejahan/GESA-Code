@@ -21,6 +21,6 @@
 
 # python3 ShapeNet55_PCD.py 
 
-python3  ShapeNet55_Attack.py --mode Train
-python3  ShapeNet55_Attack.py --mode Test
+python3  GESA-Shape.py --mode Train
+python3  GESA-Shape.py --mode Test
 
