@@ -27,7 +27,7 @@ To downsample in any resolution:
 
 # GESA-Shape
 
-We generated GESA-Shape using randomly generated packet loss 19% (V1), 24% (V2) & 31% (V3). 
+We generated GESA-Shape using randomly generated packet loss 19% (V1), 24% (V2), and 31% (V3). 
 
 To convert as .pcd file and downsample in any resolution:
 
