@@ -13,12 +13,23 @@ To reproduce the results of the paper, please set up the Python environment usin
    
 # GESA-PCN
 
+To downsample in any resolution:
+     
      PCDtoPCD.sh
+
+ To apply Gilbert-Elliott Shape Attack(GESA)  
+ 
      PCDtoAttack.sh
 
 # GESA-Shape
 
+To convert as .pcd file and downsample in any resolution:
 
+     NPYtoPCD.sh
+
+To apply Gilbert-Elliott Shape Attack(GESA) 
+
+     PCDtoAttack.sh
 
 
 # Citation
