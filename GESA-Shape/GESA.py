@@ -3,14 +3,10 @@
 Author: Most Husne Jahan
 August -2023
 
-File: Gilbert-Attack.py
+File: GESA.py
 
 "Non-Monotonic Attack" randomly drops points from the point cloud; 
 "Monotonic Attack" randomly drops several k-NN clusters from the point cloud;
-
-
-1. Generate GESA_PCA_PCN Dataset
-2. Generate GESA-PCA-Shape Dataset
 
 """
 
@@ -82,9 +78,11 @@ def packet_loss():
     # Lets assume Raw point cloud N =2048
     total_packets = 2048
     Packet_Loss =[]
-    p_good_range = (0.88, 0.9)
-    #p_good_range = (0.8, 0.9)
-    p_bad_range = (0.6, 0.99)
+    # p_good_range = (0.89, 0.9)
+    p_good_range = (0.5, 0.9)
+    # p_good_range = (0.8, 0.9)
+
+    p_bad_range = (0.5, 0.99)
     #bad_range = [(0.5, 0.6),(0.5, 0.7),(0.5, 0.8),(0.4, 0.9),(0.3, 0.9)]
     bad_range = [(0.5, 0.6),(0.5, 0.7),(0.5, 0.8),(0.4, 0.9),(0.3, 0.9)]
     p_g2b_range = (0.1, 0.5)
@@ -178,7 +176,6 @@ def Monotonic_Attack(pointcloud, level):
     total_cluster_size = 100 * (Packet_Loss_level + 1)
     # 8cluster, 2048 points, random cluster size
     # num_clusters = np.random.randint(1, 5)
-    # num_clusters = 5
     num_clusters = 1
     # print(f"\n Total Cluster #: {num_clusters}")
     cluster_size_list = _gen_random_cluster_sizes(num_clusters, total_cluster_size)
