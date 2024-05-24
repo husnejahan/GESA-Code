@@ -1,0 +1,24 @@
+# sudo apt install python3-pybind11
+# sudo apt-get install ninja-build
+# sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
+
+argparse
+# easydict
+urllib3==1.26.6
+h5py
+matplotlib
+numpy
+pyyaml
+open3d
+open3d-python
+opencv-python
+scipy
+tensorboardX
+torchvision
+torch
+transforms3d
+# tqdm
+# pillow>=6.2.0
+
+# pykitti
+#tensorflow-gpu
