@@ -1,9 +1,8 @@
 # GESA: Exploring Loss-based Adversarial Attacks in Volumetric Media Streaming
 
 # Overview
-  ![ALT TEXT](./resources/pipeline.png)
-
-<img src="./resources/pipeline.png" width="128"/>
+ 
+<img src="./resources/pipeline.png" width="450"/>
 
 # Install
 
