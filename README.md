@@ -12,7 +12,7 @@ To reproduce the results of the paper, please set up the Python environment usin
       source my-env/bin/activate
       pip3 install -r requirements.txt
 
-# Usage
+# Download datasets
     Fisrt download the PCN and shapeNet55 dataset.
 
 # GESA-PCN
