@@ -3,6 +3,8 @@
 # Overview
   ![ALT TEXT](./resources/pipeline.png)
 
+<img src="./resources/pipeline.png" width="128"/>
+
 # Install
 
 To reproduce the results of the paper, please set up the Python environment using the following code:
