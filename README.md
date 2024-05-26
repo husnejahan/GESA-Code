@@ -3,7 +3,7 @@
 # Overview
 
 
-# Requirement
+# Install
 
 To reproduce the results of the paper, please set up the Python environment using the following code:
 
@@ -11,7 +11,10 @@ To reproduce the results of the paper, please set up the Python environment usin
       python3 -m venv my-env
       source my-env/bin/activate
       pip3 install -r requirements.txt
-   
+
+# Usage
+    Fisrt download the PCN and shapeNet55 dataset.
+
 # GESA-PCN
 
 We generated GESA-PCN using randomly generated packet loss 17% (V1), 28% (V2), and 46% (V3).
