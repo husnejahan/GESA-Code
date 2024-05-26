@@ -13,7 +13,7 @@ To reproduce the results of the paper, please set up the Python environment usin
       pip3 install -r requirements.txt
 
 # Download datasets
-    Fisrt download the PCN and shapeNet55 dataset.
+    Fisrt download the ground truth(GT) of PCN and shapeNet55 datasets.
 
 # GESA-PCN
 
