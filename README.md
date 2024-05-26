@@ -1,7 +1,7 @@
 # GESA: Exploring Loss-based Adversarial Attacks in Volumetric Media Streaming
 
 # Overview
-
+  ![ALT TEXT](../IMAGE_PATH/image.png)
 
 # Install
 
