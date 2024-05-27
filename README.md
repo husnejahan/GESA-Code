@@ -39,6 +39,8 @@ We generated GESA-Shape using randomly generated packet loss 19% (V1), 24% (V2),
 
 To convert as .pcd file and downsample in any resolution:
 
+Convert ShapeNet-55 Dataset to .PCD
+
      cd GESA-Shape
      sh NPYtoPCD.sh
 
