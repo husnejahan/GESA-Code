@@ -13,7 +13,7 @@ To reproduce the results of the paper, please set up the Python environment usin
       source my-env/bin/activate
       pip3 install -r requirements.txt
 
-# Download datasets
+# Download Ground Truth Datasets
     Fisrt download the ground truth(GT) of PCN and shapeNet55 datasets.
 
    [ShapeNet55](https://drive.google.com/file/d/1jUB5yD7DP97-EqqU2A9mmr61JpNwZBVK/view?usp=sharing)
