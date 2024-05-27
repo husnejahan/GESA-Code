@@ -40,18 +40,12 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--train_complete_source', type=str, default='ShapeNetCompletion/train/complete', help='train complete source')
 parser.add_argument('--train_complete_des', type=str, default='ShapeNetCompletion2048/train/complete', help='train complete destination')
-# parser.add_argument('--train_partial_source', type=str, default='ShapeNetCompletion/train/partial', help='train partial source')
-# parser.add_argument('--train_partial_des', type=str, default='ShapeNetCompletion2048/train/partial', help='train partial destination')
 
 parser.add_argument('--val_complete_source', type=str, default='ShapeNetCompletion/val/complete', help='val complete source')
 parser.add_argument('--val_complete_des', type=str, default='ShapeNetCompletion2048/val/complete', help='val complete destination')
-# parser.add_argument('--val_partial_source', type=str, default='ShapeNetCompletion/val/partial', help='val partial source')
-# parser.add_argument('--val_partial_des', type=str, default='ShapeNetCompletion2048/val/partial', help='val partial destination')
 
 parser.add_argument('--test_complete_source', type=str, default='ShapeNetCompletion/test/complete', help='test complete source')
 parser.add_argument('-test_complete_des', type=str, default='ShapeNetCompletion2048/test/complete', help='test complete destination')
-# parser.add_argument('--test_partial_source', type=str, default='ShapeNetCompletion/test/partial', help='test partial source')
-# parser.add_argument('--test_partial_des', type=str, default='ShapeNetCompletion2048/test/partial', help='test partial destination')
 
 
 parser.add_argument('--mode', type=str, default='Train', help='Train or Val or Test')
@@ -61,20 +55,12 @@ args = parser.parse_args()
 ########## Create path #####################  
 train_complete_source = args.train_complete_source
 train_complete_des = args.train_complete_des
-# train_partial_source = args.train_partial_source
-# train_partial_des = args.train_partial_des
-
 
 val_complete_source = args.val_complete_source
 val_complete_des = args.val_complete_des
-# val_partial_source = args.val_partial_source
-# val_partial_des = args.val_partial_des
 
 test_complete_source = args.test_complete_source
 test_complete_des = args.test_complete_des
-# test_partial_source = args.test_partial_source
-# test_partial_des = args.test_partial_des
-
 
 ########## For PCN Complete/GT Downsample #####################  
 
@@ -180,32 +166,23 @@ if __name__ == '__main__':
 
         train_complete_source = args.train_complete_source
         train_complete_des = args.train_complete_des
-        # train_partial_source = args.train_partial_source
-        # train_partial_des = args.train_partial_des
 
         downsample(train_complete_source, train_complete_des)
-        # downsample(train_partial_source, train_partial_des)
-
+       
     elif args.mode=='Val': 
 
         val_complete_source = args.val_complete_source
         val_complete_des = args.val_complete_des
-        # val_partial_source = args.val_partial_source
-        # val_partial_des = args.val_partial_des
-
+     
         downsample(val_complete_source, val_complete_des)
-        # downsample(val_partial_source, val_partial_des)
-
+        
     else: 
 
         test_complete_source = args.test_complete_source
         test_complete_des = args.test_complete_des
-        # test_partial_source = args.test_partial_source
-        # test_partial_des = args.test_partial_des
-
+      
         downsample(test_complete_source, test_complete_des)
-        # downsample(test_partial_source, test_partial_des)   
-    
+      
     print('============= File conversion completed ==============')
 
 ########################## Monotonic-Attack on Train Val #####################################
