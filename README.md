@@ -16,6 +16,10 @@ To reproduce the results of the paper, please set up the Python environment usin
 # Download datasets
     Fisrt download the ground truth(GT) of PCN and shapeNet55 datasets.
 
+   [ShapeNet55](https://drive.google.com/file/d/1jUB5yD7DP97-EqqU2A9mmr61JpNwZBVK/view?usp=sharing)
+
+   [PCN](https://gateway.infinitescript.com/?fileName=ShapeNetCompletion)
+
 # GESA-PCN
 
 We generated GESA-PCN using randomly generated packet loss 17% (V1), 28% (V2), and 46% (V3).
