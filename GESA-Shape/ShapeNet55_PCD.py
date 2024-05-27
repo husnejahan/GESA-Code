@@ -3,7 +3,7 @@
 Author: Most Husne Jahan
 August -2023
 
-Generate Generate GESA-Shape Dataset
+Convert ShapeNet-55 Dataset to .PCD
 
 """
 
