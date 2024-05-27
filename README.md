@@ -27,11 +27,11 @@ We generated GESA-PCN using randomly generated packet loss 17% (V1), 28% (V2), a
 To downsample in any resolution:
 
      cd GESA-PCN
-     PCDtoPCD.sh
+     sh PCDtoPCD.sh
 
  To apply Gilbert-Elliott Shape Attack(GESA)  
  
-     PCDtoAttack.sh
+     sh PCDtoAttack.sh
 
 # GESA-Shape
 
@@ -40,11 +40,11 @@ We generated GESA-Shape using randomly generated packet loss 19% (V1), 24% (V2),
 To convert as .pcd file and downsample in any resolution:
 
      cd GESA-Shape
-     NPYtoPCD.sh
+     sh NPYtoPCD.sh
 
 To apply Gilbert-Elliott Shape Attack(GESA) 
 
-     PCDtoAttack.sh
+     sh PCDtoAttack.sh
 
 
 # Citation
