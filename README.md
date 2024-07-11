@@ -3,7 +3,7 @@
 
 # Project Page
 
-![Project Page](https://in2gm.github.io/GESA/)
+![Project Page](https://in2gm.github.io/GESA)
      
 # Pipeline
  
