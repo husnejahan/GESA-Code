@@ -35,178 +35,83 @@ Generate Generate GESA-Shape Dataset:
 #===========================================================================
 #===========================================================================
 
-from GESA import *
+from GESA import PointCloudAttack  # Assuming PointCloudAttack is in GESA.py
 import argparse
 import os
 import open3d as o3d
 import numpy as np
-import pandas as pd
-import h5py
 from pathlib import Path
 
-parser = argparse.ArgumentParser()
+class GESA-ShapeDataGenerator:
+    def __init__(self, packet_loss_level, attack_type='monotonic'):
+        self.attack_simulator = PointCloudAttack(packet_loss_level)
+        self.attack_type = attack_type
 
-parser.add_argument('--train_folder_source', type=str, default='ShapeNet-55_V2/train/complete', help='train source')
-parser.add_argument('--train_folder_des', type=str, default='ShapeNet-55_V2/train/attack', help='train destination')
+    def read_pcd(self, filename):
+        pcd = o3d.io.read_point_cloud(filename)
+        points = np.array(pcd.points)
+        return points, pcd
 
-parser.add_argument('--test_folder_source', type=str, default='ShapeNet-55_V2/test/complete', help='test source')
-parser.add_argument('--test_folder_des', type=str, default='ShapeNet-55_V2/test/attack', help='test destination')
+    def save_pcd(self, filename, points):
+        pcd = o3d.geometry.PointCloud()
+        pcd.points = o3d.utility.Vector3dVector(points)
+        o3d.io.write_point_cloud(filename, pcd)
 
-parser.add_argument('--mode', type=str, default='Train', help='Train or Val or Test')
-args = parser.parse_args()
+    def show_pcd(self, points):
+        pcd = o3d.geometry.PointCloud()
+        pcd.points = o3d.utility.Vector3dVector(points)
+        o3d.visualization.draw_geometries([pcd])
 
+    def apply_attack(self, pointcloud):
+        if self.attack_type == 'monotonic':
+            level = round(self.attack_simulator.packet_loss_level / 10)
+            return self.attack_simulator.monotonic_attack(pointcloud)
+        elif self.attack_type == 'non_monotonic':
+            return self.attack_simulator.non_monotonic_attack(pointcloud)
+        else:
+            raise ValueError(f"Unknown attack type: {self.attack_type}")
 
-########## Create path #####################  
+    def process_directory(self, source_path, dest_path):
+        if not os.path.exists(dest_path):
+            os.makedirs(dest_path, exist_ok=True)
 
-TRAIN_COMPLETE_POINTS_PATH = args.train_folder_source
-TRAIN_OUT_PATH = args.train_folder_des
-
-# VAL_COMPLETE_POINTS_PATH = args.val_folder_source
-# VAL_OUT_PATH = args.val_folder_des
-
-TEST_COMPLETE_POINTS_PATH = args.test_folder_source
-TEST_OUT_PATH = args.test_folder_des
-
-# # Get Loss
-# Packet_Loss =  packet_loss()
-# print('Packet Loss=',Packet_Loss)
-
-
-########## For PCN #####################  
-
-def read_pcd(filename):
-    pcd = o3d.io.read_point_cloud(filename)
-    
-    points = np.array(pcd.points)
-    
-    return points,pcd
-
-
-def save_pcd(filename, points):
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(points)
-    o3d.io.write_point_cloud(filename, pcd) 
-    
-
-def show_pcd(points):
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(points)
-    o3d.visualization.draw_geometries([pcd])
-
-########## For Completion3D #####################  
-
-# def save_pcd(filename, points):
-
-#     pcd = o3d.geometry.PointCloud()
-#     pcd.points = o3d.utility.Vector3dVector(points)
-
-#     # new_filename = Path(filename).stem + ".pcd"
-#     (prefix, sep, suffix) = filename.rpartition('.')
-
-#     new_filename = prefix + '.pcd'
-#     o3d.io.write_point_cloud(new_filename, pcd) 
-
-# def load_h5(path, verbose=False):
-#     if verbose:
-#         print("Loading %s \n" % (path))
-#     f = h5py.File(path, 'r')
-#     cloud_data = np.array(f['data'])
-#     f.close()
-
-#     return cloud_data
-
-##########  For Completion3D  #####################  
-
-############### Monotonic-Attack on Train Val Test ##################
-def attack(COMPLETE_POINTS_PATH,OUT_PATH,Packet_Loss):
-
-    print("Files and directories in a specified path:")
-
-    if not os.path.exists(OUT_PATH):
-        # os.mkdir(OUT_PATH)
-        os.makedirs(OUT_PATH, exist_ok=True)
-
-    if os.path.exists(OUT_PATH):
-
-        for root, folders, files in os.walk(COMPLETE_POINTS_PATH):   
+        for root, folders, files in os.walk(source_path):
             for folder in folders:
-                print(os.path.join(root, folder))
-                full_path = os.path.join(OUT_PATH,folder)
+                full_path = os.path.join(dest_path, folder)
                 if not os.path.exists(full_path):
-                    # os.mkdir(full_path)
                     os.makedirs(full_path, exist_ok=True)
 
-        for fname in os.listdir(COMPLETE_POINTS_PATH):
-
-            # build the path to the folder
-            folder_path = os.path.join(COMPLETE_POINTS_PATH, fname)
-            out_folder = os.path.join(OUT_PATH,fname)
+        for fname in os.listdir(source_path):
+            folder_path = os.path.join(source_path, fname)
+            out_folder = os.path.join(dest_path, fname)
 
             if os.path.isdir(folder_path):
-                
-                # we are sure this is a folder; now lets iterate it
                 for file_name in os.listdir(folder_path):
                     file_path = os.path.join(folder_path, file_name)
-                    points, pcd= read_pcd(file_path)
-                    # points =load_h5(file_path)
-                    pointsfps = fps(points,2048)
-                    # If Loss 50% then level is 50
-                    print('Packet Loss=',Packet_Loss[0])
-                    level= round(Packet_Loss[0])
-
-                    print(f"Applying packet loss on file #: {file_path}")
-
-                    # Monotonic-Attack on Train Val Test
-                    pointcloud = Monotonic_Attack(pointsfps,level)
-
-                    # pointcloud = fps(pointcloud, 1024)
-
-                    print(pointcloud.shape)
-                    #show_pcd(pointcloud) 
-                    out_path = os.path.join(out_folder,file_name)
-                    save_pcd("{}".format(out_path),pointcloud)
-                    print("saved file {} \n".format(out_path))
-
-    else:
-         print("============ Attacked file Exists=============") 
-
-
-############## Monotonic-Attack on Train Val #####################
+                    points, _ = self.read_pcd(file_path)
+                    points_fps = self.attack_simulator.fps(points, 2048)
+                    attacked_points = self.apply_attack(points_fps)
+                    out_path = os.path.join(out_folder, file_name)
+                    self.save_pcd(out_path, attacked_points)
+                    print(f"Saved file {out_path}")
 
 if __name__ == '__main__':
-    
-    # Get Loss
-    Packet_Loss =  packet_loss()
-    print('Packet Loss=',Packet_Loss)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--train_folder_source', type=str, default='ShapeNet-55_V2/train/complete', help='Train source')
+    parser.add_argument('--train_folder_des', type=str, default='ShapeNet-55_V2/train/attack', help='Train destination')
+    parser.add_argument('--test_folder_source', type=str, default='ShapeNet-55_V2/test/complete', help='Test source')
+    parser.add_argument('--test_folder_des', type=str, default='ShapeNet-55_V2/test/attack', help='Test destination')
+    parser.add_argument('--packet_loss_level', type=int, required=True, help='Packet loss level')
+    parser.add_argument('--mode', type=str, default='Train', choices=['Train', 'Test'], help='Mode: Train or Test')
+    parser.add_argument('--attack_type', type=str, default='monotonic', choices=['monotonic', 'non_monotonic'], help='Type of attack')
 
+    args = parser.parse_args()
 
-    if args.mode=='Train':
+    generator = GESA-ShapeDataGenerator(args.packet_loss_level, args.attack_type)
 
-        source_path = TRAIN_COMPLETE_POINTS_PATH
-        out_folder = TRAIN_OUT_PATH
+    if args.mode == 'Train':
+        generator.process_directory(args.train_folder_source, args.train_folder_des)
+    elif args.mode == 'Test':
+        generator.process_directory(args.test_folder_source, args.test_folder_des)
 
-        # train_folder_des = 'ShapeNet-55_processed/Train'
-
-        # if not os.path.exists(TRAIN_OUT_PATH):
-            # os.makedirs(TRAIN_OUT_PATH, exist_ok=True)
-
-        attack(TRAIN_COMPLETE_POINTS_PATH,TRAIN_OUT_PATH,Packet_Loss)
-
-    # elif args.mode=='Val':    
-    #     source_path = VAL_COMPLETE_POINTS_PATH
-    #     out_folder = VAL_OUT_PATH
-    #     attack(source_path,out_folder,Packet_Loss)
-
-    else:        
-        source_path = TEST_COMPLETE_POINTS_PATH
-        out_folder = TEST_OUT_PATH
-        
-        # if not os.path.exists(TEST_OUT_PATH):
-            #   os.makedirs(TEST_OUT_PATH, exist_ok=True)
-
-        attack(TEST_COMPLETE_POINTS_PATH,TEST_OUT_PATH,Packet_Loss)    
-    
     print('============= File conversion completed ==============')
-
-########################## Monotonic-Attack on Train Val #####################################
-
