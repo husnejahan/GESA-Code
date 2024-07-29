@@ -42,7 +42,7 @@ import open3d as o3d
 import numpy as np
 from pathlib import Path
 
-class GESA-ShapeDataGenerator:
+class GESA_ShapeDataGenerator:
     def __init__(self, packet_loss_level, attack_type='monotonic'):
         self.attack_simulator = PointCloudAttack(packet_loss_level)
         self.attack_type = attack_type
@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    generator = GESA-ShapeDataGenerator(args.packet_loss_level, args.attack_type)
+    generator = GESA_ShapeDataGenerator(args.packet_loss_level, args.attack_type)
 
     if args.mode == 'Train':
         generator.process_directory(args.train_folder_source, args.train_folder_des)
