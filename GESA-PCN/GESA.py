@@ -12,7 +12,7 @@ import numpy as np
 import random
 import open3d as o3d
 
-class AttackSimulator:
+class PointCloudAttack:
     def __init__(self, packet_loss_level):
         self.packet_loss_level = packet_loss_level
 
@@ -146,6 +146,7 @@ class AttackSimulator:
                         print(f"Saved file {out_path}")
 
 if __name__ == '__main__':
+    import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--source_path', type=str, required=True, help='Source path for point clouds')
     parser.add_argument('--dest_path', type=str, required=True, help='Destination path for attacked point clouds')
@@ -153,6 +154,6 @@ if __name__ == '__main__':
     parser.add_argument('--packet_loss_level', type=int, required=True, help='Packet loss level')
 
     args = parser.parse_args()
-    simulator = AttackSimulator(args.packet_loss_level)
+    simulator = PointCloudAttack(args.packet_loss_level)
     simulator.load_and_save_pointcloud(args.source_path, args.dest_path, args.attack_type)
     print('============= Attack simulation completed ==============')
