@@ -58,8 +58,10 @@ To apply Gilbert-Elliott Shape Attack(GESA)
 
 If you find our work useful for your research, please consider citing the following paper:
 
-    @article{GESA,
-    title={GESA: Exploring Loss-based Adversarial Attacks in Volumetric Media Streaming},
-    author={Most Husne Jahan, Dr. Abdelhak Bentaleb},
-    journal={The 7th IEEE International Conference on Multimedia Information Processing and Retrieval(MIPR)},
-    year={2024}
+       @inproceedings{GESA,
+       title={GESA: Exploring Loss-based Adversarial Attacks in Volumetric Media Streaming},
+       author={Jahan, Most Husne and Bentaleb, Abdelhak},
+       booktitle={Proceedings of the IEEE International Conference on Multimedia Information Processing and Retrieval (MIPR)},
+       pages={x--x},
+       year={2024}
+       }
