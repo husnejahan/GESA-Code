@@ -3,7 +3,7 @@
 Author: Most Husne Jahan
 August -2023
 
-Generate Generate GESA-PCA_Shape Dataset:
+Generate Generate GESA_Shape Dataset:
 
 we get 41,952 models for training and 10,518 models for testing.
 For each object, randomly sample 8,192 points from the surface to obtain the point cloud.
