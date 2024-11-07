@@ -4,15 +4,10 @@ Author: Most Husne Jahan
 August -2023
 
 
-Generate PCN-Attack Dataset:
+Generate GESA Dataset:
 
 We used only the complete point cloud from PCN dataset and apply Monotonic attack(packet loss) to create our own partial 
 point cloud for training, validation and test set.
-
-Ref: https://github.com/wentaoyuan/pcn/blob/master/io_util.py
-
-The PCN Dataset is a widely used point cloud completion benchmark that contains 30974 models of 8 categories.
-
 It contains 28974 training samples while each complete samples corresponds to 8 viewpoint partial scans, 800 validation samples and 1200 testing samples. Each ground-truth point cloud contains 16384 points, which are evenly sampled from
 the shape surface.
 
