@@ -7,7 +7,9 @@ File: Gilbert-Attack.py
 
 "Non-Monotonic Attack" randomly drops points from the point cloud; 
 "Monotonic Attack" randomly drops several k-NN clusters from the point cloud;
-Generate GESA Dataset
+
+1. Generate PCN-Attack Dataset
+2. Generate completion3D-Attack Dataset
 
 """
 

@@ -40,18 +40,12 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--train_complete_source', type=str, default='ShapeNetCompletion/train/complete', help='train complete source')
 parser.add_argument('--train_complete_des', type=str, default='ShapeNetCompletion2048/train/complete', help='train complete destination')
-# parser.add_argument('--train_partial_source', type=str, default='ShapeNetCompletion/train/partial', help='train partial source')
-# parser.add_argument('--train_partial_des', type=str, default='ShapeNetCompletion2048/train/partial', help='train partial destination')
 
 parser.add_argument('--val_complete_source', type=str, default='ShapeNetCompletion/val/complete', help='val complete source')
 parser.add_argument('--val_complete_des', type=str, default='ShapeNetCompletion2048/val/complete', help='val complete destination')
-# parser.add_argument('--val_partial_source', type=str, default='ShapeNetCompletion/val/partial', help='val partial source')
-# parser.add_argument('--val_partial_des', type=str, default='ShapeNetCompletion2048/val/partial', help='val partial destination')
 
 parser.add_argument('--test_complete_source', type=str, default='ShapeNetCompletion/test/complete', help='test complete source')
 parser.add_argument('-test_complete_des', type=str, default='ShapeNetCompletion2048/test/complete', help='test complete destination')
-# parser.add_argument('--test_partial_source', type=str, default='ShapeNetCompletion/test/partial', help='test partial source')
-# parser.add_argument('--test_partial_des', type=str, default='ShapeNetCompletion2048/test/partial', help='test partial destination')
 
 
 parser.add_argument('--mode', type=str, default='Train', help='Train or Val or Test')

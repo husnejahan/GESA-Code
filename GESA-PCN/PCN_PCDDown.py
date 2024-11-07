@@ -30,11 +30,9 @@ to create our own partial point cloud for training, validation set.
             "vessel"    : "04530566",  # boat
     }
 
-    V1= Packet loss= 26
 """
 #===========================================================================
 #===========================================================================
-
 from Gilbert_Attack import *
 import argparse
 import os
@@ -46,14 +44,14 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--train_folder_source', type=str, default='ShapeNetCompletion2048/train/complete', help='train source')
-parser.add_argument('--train_folder_des', type=str, default='ShapeNetCompletion2048/train/attack', help='train destination')
+parser.add_argument('--train_folder_source', type=str, default='ShapeNetCompletion/train/complete', help='train source')
+parser.add_argument('--train_folder_des', type=str, default='GESA_PCN/train/GT', help='train destination')
 
-parser.add_argument('--val_folder_source', type=str, default='ShapeNetCompletion2048/val/complete', help='val source')
-parser.add_argument('--val_folder_des', type=str, default='ShapeNetCompletion2048/val/attack', help='val destination')
+parser.add_argument('--val_folder_source', type=str, default='ShapeNetCompletion/val/complete', help='val source')
+parser.add_argument('--val_folder_des', type=str, default='GESA_PCN/val/GT', help='val destination')
 
-parser.add_argument('--test_folder_source', type=str, default='ShapeNetCompletion2048/test/complete', help='test source')
-parser.add_argument('--test_folder_des', type=str, default='ShapeNetCompletion2048/test/attack', help='test destination')
+parser.add_argument('--test_folder_source', type=str, default='ShapeNetCompletion/test/complete', help='test source')
+parser.add_argument('--test_folder_des', type=str, default='GESA_PCN/test/GT', help='test destination')
 
 parser.add_argument('--mode', type=str, default='Train', help='Train or Val or Test')
 args = parser.parse_args()
@@ -71,7 +69,7 @@ TEST_COMPLETE_POINTS_PATH = args.test_folder_source
 TEST_OUT_PATH = args.test_folder_des
 
 
-########## For PCN #####################  
+########## For PCN Complete/GT Downsample #####################  
 
 def read_pcd(filename):
     pcd = o3d.io.read_point_cloud(filename)
@@ -93,16 +91,15 @@ def show_pcd(points):
     o3d.visualization.draw_geometries([pcd])
 
 
-############### Monotonic-Attack on Train Val Test ##################
-def attack(COMPLETE_POINTS_PATH,OUT_PATH,Packet_Loss):
 
-    print("Files and directories in a specified path:")
+def downsample(COMPLETE_POINTS_PATH,OUT_PATH):
 
     if not os.path.exists(OUT_PATH):
         # os.mkdir(OUT_PATH)
         os.makedirs(OUT_PATH, exist_ok=True)
 
     if os.path.exists(OUT_PATH):
+
 
         for root, folders, files in os.walk(COMPLETE_POINTS_PATH):   
             for folder in folders:
@@ -123,62 +120,39 @@ def attack(COMPLETE_POINTS_PATH,OUT_PATH,Packet_Loss):
                     file_path = os.path.join(folder_path, file_name)
                     points, pcd= read_pcd(file_path)
                     # points =load_h5(file_path)
-                    pointsfps = fps(points,2048)
-                    # If Loss 50% then level is 50
-
-                    level = Packet_Loss
-                    print('Packet loss=',Packet_Loss)
-                    print(f"\nApplying packet loss : {Packet_Loss}")
-
-                    # Monotonic-Attack on Train Val Test
-                    pointcloud = Monotonic_Attack(pointsfps,level)
-
+                    pointcloud = fps(points,2048)
                     # pointcloud = fps(pointcloud, 1024)
 
-                    # print(pointcloud.shape)
+                    print(pointcloud.shape)
                     #show_pcd(pointcloud) 
                     out_path = os.path.join(out_folder,file_name)
                     save_pcd("{}".format(out_path),pointcloud)
                     print("saved file {} \n".format(out_path))
 
     else:
-         print("============ Attacked file Exists=============") 
+         print("============ GT Downsamles file Exists=============") 
 
 
-############## Monotonic-Attack on Train Val #####################
+########## For PCN Complete/GT Downsample #####################  
 
 if __name__ == '__main__':
     
-    # Get Loss
-    Packet_Loss_Total =  packet_loss()
-    print('Packet Loss=',Packet_Loss_Total)
-    
-    Packet_Loss = round(Packet_Loss_Total[3])
-    
-    # Total_files =[]
 
     if args.mode=='Train':
 
         source_path = TRAIN_COMPLETE_POINTS_PATH
-        out_folder = TRAIN_OUT_PATH+str(Packet_Loss)
-        if not os.path.exists(out_folder):
-           os.makedirs(out_folder, exist_ok=True)
-    
-        attack(source_path,out_folder,Packet_Loss)
+        out_folder = TRAIN_OUT_PATH
+        downsample(source_path,out_folder)
 
     elif args.mode=='Val':    
         source_path = VAL_COMPLETE_POINTS_PATH
-        out_folder = VAL_OUT_PATH+str(Packet_Loss)
-        if not os.path.exists(out_folder):
-           os.makedirs(out_folder, exist_ok=True)
-        attack(source_path,out_folder,Packet_Loss)
+        out_folder = VAL_OUT_PATH
+        downsample(source_path,out_folder)
 
     else:        
         source_path = TEST_COMPLETE_POINTS_PATH
-        out_folder = TEST_OUT_PATH+str(Packet_Loss)
-        if not os.path.exists(out_folder):
-           os.makedirs(out_folder, exist_ok=True)
-        attack(source_path,out_folder,Packet_Loss)    
+        out_folder = TEST_OUT_PATH
+        downsample(source_path,out_folder)    
     
     print('============= File conversion completed ==============')
 
