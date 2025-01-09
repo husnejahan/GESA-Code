@@ -4,6 +4,10 @@
 # Project Page
 
 [Project Page](https://in2gm.github.io/GESA)
+
+[Paper Link](https://ieeexplore.ieee.org/document/10707915)
+
+[Dataset Link](https://www.kaggle.com/datasets/mosthusnejahan/gesa-dataset)
      
 # Pipeline
  
