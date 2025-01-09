@@ -1,8 +1,5 @@
 # GESA: Exploring Loss-based Adversarial Attacks in Volumetric Media Streaming
 
-
-# Project Page
-
 [Project Page](https://in2gm.github.io/GESA)
 
 [Paper Link](https://ieeexplore.ieee.org/document/10707915)
